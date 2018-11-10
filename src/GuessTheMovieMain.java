@@ -25,7 +25,7 @@ public class GuessTheMovieMain {
 				movie = scan.nextLine();
 				counter++;
 			}
-			answer = NumUnderscores(movie.length()); //gets the number of underscores 
+			answer = NumUnderscores(movie); //gets the number of underscores 
 			System.out.println("You are guessing: " + answer);
 			
 			//while the user has not won or guessed wrong 10 times
@@ -35,7 +35,7 @@ public class GuessTheMovieMain {
 				if (IsInAnswer(user)) { //if input is in the answer
 					EditAnswer(user); //change output
 				}else {
-					wrong += user;
+					wrong += user + " ";
 					System.out.println("You have guessed (" + ++guesses + ") wrong letters: " + wrong);
 				}
 			}
@@ -53,13 +53,8 @@ public class GuessTheMovieMain {
 		
 	}
 	
-	private static String NumUnderscores(int length) {
-		int temp = length;
-		String underscores = "";
-		while(temp>0) {
-			underscores += "_";
-			temp--;
-		}
+	private static String NumUnderscores(String movie) {
+		String underscores = movie.replaceAll("[a-zA-Z]", "_"); 
 		return underscores;
 	}
 	
