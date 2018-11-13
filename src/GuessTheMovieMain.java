@@ -3,17 +3,20 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class GuessTheMovieMain {
-
+	static boolean hasWon = false;
+	private static Scanner scan;
+	private static Scanner userscan;
+	private static StringBuilder builder;
+	
 	public static void main(String[] args) throws Exception{
 		try {
 			File file = new File("movies.txt"); //opens file
-			Scanner scan = new Scanner(file); //scans file
-			Scanner userscan = new Scanner(System.in); //takes in user input
+			scan = new Scanner(file);
+			userscan = new Scanner(System.in);
 			String movie = ""; //holds movie name
 			String answer = ""; //underscores
-			String user = ""; //holds user input
+			String userIn = ""; //holds user input
 			String wrong = ""; //holds wrong letters
-			boolean hasWon = false;
 			int guesses = 0;
 			int randomMovie = (int) (Math.random() *25)+1; //randomize movie
 			int counter = 0; //keeps track of which
@@ -26,24 +29,27 @@ public class GuessTheMovieMain {
 				counter++;
 			}
 			answer = NumUnderscores(movie); //gets the number of underscores 
-			System.out.println("You are guessing: " + answer);
 			
 			//while the user has not won or guessed wrong 10 times
 			while(!hasWon && guesses < 10) {
+				System.out.println("You are guessing: " + answer);
 				System.out.println("Guess a letter: ");
-				user = userscan.nextLine(); //scans for user input
-				if (IsInAnswer(user)) { //if input is in the answer
-					EditAnswer(user); //change output
+				userIn = userscan.nextLine(); //scans for user input
+				if(userIn.length() != 1) {
+					System.out.println("Type only 1 letter, try again.");
+				}
+				else if (IsInAnswer(movie, userIn)) { //if input is in the answer
+					answer = EditAnswer(movie, answer, userIn); //change output
 				}else {
-					wrong += user + " ";
+					wrong += userIn + " ";
 					System.out.println("You have guessed (" + ++guesses + ") wrong letters: " + wrong);
 				}
 			}
-			
-			
-			System.out.println("The movie is: " + movie);
-			
-			
+			if(hasWon) {
+				System.out.println("You Won!");
+			}else {
+				System.out.println("Sorry, the movie was: " + movie);
+			}
 			
 			
 		} catch (FileNotFoundException e) {
@@ -53,20 +59,41 @@ public class GuessTheMovieMain {
 		
 	}
 	
+	//replace movie title with underscores
 	private static String NumUnderscores(String movie) {
 		String underscores = movie.replaceAll("[a-zA-Z]", "_"); 
 		return underscores;
 	}
 	
 	//changes answer if a char is found
-	private static void EditAnswer(String answer) {
-		System.out.println("edit answer");
-		//TODO if there are no more underscores, hasWon = true
+	//if there are no more underscores, hasWon = true
+	private static String EditAnswer(String movie, String answer, String letter) {
+		builder = new StringBuilder();
+		char edit[] = answer.toCharArray(); //contains to-be edited chars
+		char ch; //contains char to-be replaced
+		String chletter = ""; //to compare using String.valueOf()
+		
+		for(int i=0; i<movie.length();i++) { //traverse thru String
+			ch = movie.charAt(i);
+			chletter = String.valueOf(ch);
+			if(chletter.equals(letter)) {
+				edit[i] = ch;
+			}
+		}
+		for(char value : edit) {
+			builder.append(value);
+		}
+		String editted = builder.toString();
+		if(!editted.contains("_")) hasWon = true;
+		return editted; 
 	}
 	
 	//if letter is in answer,
-	private static boolean IsInAnswer(String letter) {
+	private static boolean IsInAnswer(String movie, String letter) {
 		//TODO if letter is in answer, return true
+		if(movie.contains(letter)) {
+			return true;
+		}
 		return false;
 	}
 
