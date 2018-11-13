@@ -9,7 +9,7 @@ BUT the more correct letters you guess the more obvious the movie becomes and at
 The program will randomly pick a movie title from a text file that contains a large list of movies."
 
 Winning output: 
-[!alt text](https://github.com/agiang96/JavaL3/blob/master/pics/WinningOutput.JPG)
+![alt text](https://github.com/agiang96/JavaL3/blob/master/pics/WinningOutput.JPG)
 
 Losing output:
-[!alt text](https://github.com/agiang96/JavaL3/blob/master/pics/LosingOutput.JPG)
+![alt text](https://github.com/agiang96/JavaL3/blob/master/pics/LosingOutput.JPG)
