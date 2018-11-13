@@ -42,15 +42,14 @@ public class GuessTheMovieMain {
 					answer = EditAnswer(movie, answer, userIn); //change output
 				}else {
 					wrong += userIn + " ";
-					System.out.println("You have guessed (" + ++guesses + ") wrong letters: " + wrong);
 				}
+				System.out.println("You have guessed (" + ++guesses + ") wrong letters: " + wrong);
 			}
 			if(hasWon) {
-				System.out.println("You Won!");
+				System.out.println("You Win! You have guessed " + movie + " correctly!");
 			}else {
 				System.out.println("Sorry, the movie was: " + movie);
 			}
-			
 			
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found: " + e);
@@ -90,7 +89,6 @@ public class GuessTheMovieMain {
 	
 	//if letter is in answer,
 	private static boolean IsInAnswer(String movie, String letter) {
-		//TODO if letter is in answer, return true
 		if(movie.contains(letter)) {
 			return true;
 		}
