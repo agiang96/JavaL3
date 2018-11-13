@@ -21,7 +21,7 @@ public class GuessTheMovieMain {
 			int randomMovie = (int) (Math.random() *25)+1; //randomize movie
 			int counter = 0; //keeps track of which
 			
-			System.out.println("random num is: "+ randomMovie);
+//			System.out.println("random num is: "+ randomMovie); //for testing purposes
 			
 			//chooses which movie
 			while(scan.hasNextLine() && counter != randomMovie) {
@@ -41,7 +41,7 @@ public class GuessTheMovieMain {
 				else if (IsInAnswer(movie, userIn)) { //if input is in the answer
 					answer = EditAnswer(movie, answer, userIn); //change output
 				}else {
-					wrong += userIn + " ";
+					wrong += userIn + " "; //appends the wrong letter to wrong output
 				}
 				System.out.println("You have guessed (" + ++guesses + ") wrong letters: " + wrong);
 			}
@@ -87,7 +87,7 @@ public class GuessTheMovieMain {
 		return editted; 
 	}
 	
-	//if letter is in answer,
+	//if letter is in answer, return true
 	private static boolean IsInAnswer(String movie, String letter) {
 		if(movie.contains(letter)) {
 			return true;
