@@ -42,8 +42,9 @@ public class GuessTheMovieMain {
 					answer = EditAnswer(movie, answer, userIn); //change output
 				}else {
 					wrong += userIn + " "; //appends the wrong letter to wrong output
+					guesses++;
 				}
-				System.out.println("You have guessed (" + ++guesses + ") wrong letters: " + wrong);
+				System.out.println("You have guessed (" + guesses + ") wrong letters: " + wrong);
 			}
 			if(hasWon) {
 				System.out.println("You Win! You have guessed " + movie + " correctly!");
